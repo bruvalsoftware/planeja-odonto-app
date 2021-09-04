@@ -1,0 +1,25 @@
+
+<h2 mat-dialog-title>Novo Franqueado</h2>
+<mat-dialog-content >
+    <form style="width:100%;"[formGroup]="franchiseeForm" (ngSubmit)="sendData()">
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Nome</mat-label>
+            <input formControlName="name"  matInput>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Email</mat-label>
+            <input formControlName="email"  matInput>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Telefone</mat-label>
+            <input formControlName="email" matInput>
+        </mat-form-field>
+        <br>    
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Adicionar</button>
+</mat-dialog-actions>

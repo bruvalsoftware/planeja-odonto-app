@@ -1,29 +1,25 @@
-/*!
-
-=========================================================
-* Material Dashboard Angular - v2.6.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-angular2
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/material-dashboard-angular2/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { hmrBootstrap } from './hmr';
 
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
-import 'hammerjs';
 
 if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule);
+const bootstrap = () => platformBrowserDynamic().bootstrapModule(AppModule);
+if (environment.hmr) {
+  if (module[ 'hot' ]) {
+    hmrBootstrap(module, bootstrap);
+  } else {
+    console.error('HMR is not enabled for webpack-dev-server!');
+    console.log('Are you using the --hmr flag for ng serve?');
+  }
+} else {
+  bootstrap().catch(err => console.log(err));
+}
+
+platformBrowserDynamic().bootstrapModule(AppModule)
+  .catch(err => console.error(err));
