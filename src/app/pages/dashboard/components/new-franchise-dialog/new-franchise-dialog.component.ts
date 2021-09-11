@@ -9,9 +9,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class NewFranchiseDialogComponent implements OnInit {
   
   franchiseForm = new FormGroup({
-    name: new FormControl('', Validators.required),
-    email: new FormControl('', Validators.required),
-    phone: new FormControl('', Validators.required),
+    franchisee: new FormControl('', Validators.required),
+    city: new FormControl('', Validators.required),
+    state: new FormControl('', Validators.required),
+    district: new FormControl('', Validators.required)
   });
   constructor() { }
 

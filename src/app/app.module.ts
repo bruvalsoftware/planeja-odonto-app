@@ -12,11 +12,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { DashboardModule } from './pages/dashboard/dashboard.module';
 import { FranchiseModule } from './pages/franchise/franchise.module';
 
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { AuthModule } from './pages/auth/auth.module';
 import { NgxEchartsModule } from 'ngx-echarts';
 
 
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './shared/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -32,6 +37,10 @@ import { NgxEchartsModule } from 'ngx-echarts';
     BrowserAnimationsModule,
     RouterModule,
     AppRoutingModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
     ToastrModule.forRoot(),
     MatCardModule,
     MatButtonModule,
@@ -39,7 +48,13 @@ import { NgxEchartsModule } from 'ngx-echarts';
       echarts: () => import('echarts')
     })
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

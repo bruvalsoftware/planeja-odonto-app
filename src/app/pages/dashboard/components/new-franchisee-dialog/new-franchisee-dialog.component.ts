@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
+import { FranchiseeService } from 'src/app/shared/services/franchisee.service';
 
 @Component({
   selector: 'app-new-franchisee-dialog',
@@ -14,13 +16,27 @@ export class NewFranchiseeDialogComponent implements OnInit {
     phone: new FormControl('', Validators.required),
   });
 
-  constructor() { }
+  constructor( 
+    private franchiseeService: FranchiseeService,
+    public dialogRef: MatDialogRef<NewFranchiseeDialogComponent>,
+    ) { }
 
   ngOnInit(): void {
   }
+
   
   sendData() {
     let data = this.franchiseeForm.value;
-    
+    this.franchiseeService.createFranchisee(data).subscribe({
+      next: (result: any) => {
+      console.log(result);
+      },
+      error: (err: any) => {
+      console.log(err);
+      },
+      complete: () => {
+        this.dialogRef.close();
+      }
+      });
   }
 }

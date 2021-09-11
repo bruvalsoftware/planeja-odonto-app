@@ -16,6 +16,8 @@ import {
 import { FranchiseeTableData } from '../../models/franchisee-table-data';
 import { NewFranchiseDialogComponent } from '../../components/new-franchise-dialog/new-franchise-dialog.component';
 import { FranchiseTableData } from '../../models/franchise-table-data';
+import { FranchiseeService } from 'src/app/shared/services/franchisee.service';
+import { Franchisee } from 'src/app/shared/models/Franchisee';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -24,29 +26,18 @@ import { FranchiseTableData } from '../../models/franchise-table-data';
 })
 export class DashboardPageComponent {
   
-  public dailyLineChartData$: Observable<DailyLineChartData>;
-  public performanceChartData$: Observable<PerformanceChartData>;
-  public revenueChartData$: Observable<RevenueChartData>;
-  public serverChartData$: Observable<ServerChartData>;
-  public supportRequestData$: Observable<SupportRequestData[]>;
-  public visitsChartData$: Observable<VisitsChartData>;
-  public projectsStatsData$: Observable<ProjectStatData>;
-  
-  public franchiseeTableData$: Observable<FranchiseeTableData[]>;
+
+  public franchiseeTableData$: Observable<Franchisee[]>;
   public franchiseTableData$: Observable<FranchiseTableData[]>;
 
   constructor(
     private service: DashboardService,
-    public dialog: MatDialog
+    private franchiseeService: FranchiseeService,
+    public dialog: MatDialog,
+    
     ) {
-    this.dailyLineChartData$ = this.service.loadDailyLineChartData();
-    this.performanceChartData$ = this.service.loadPerformanceChartData();
-    this.revenueChartData$ = this.service.loadRevenueChartData();
-    this.serverChartData$ = this.service.loadServerChartData();
-    this.supportRequestData$ = this.service.loadSupportRequestData();
-    this.visitsChartData$ = this.service.loadVisitsChartData();
-    this.projectsStatsData$ = this.service.loadProjectsStatsData();
-    this.franchiseeTableData$ = this.service.loadFranchiseeTableData();
+    this.franchiseeService.getFranchiseesT().subscribe( res => console.log(res));
+    //this.franchiseeTableData$ = this.franchiseeService.getFranchisees();
     this.franchiseTableData$ = this.service.loadFranchiseTableData();
 
   }

@@ -3,23 +3,23 @@
 <mat-dialog-content >
     <form style="width:100%;"[formGroup]="franchiseForm" (ngSubmit)="sendData()">
         <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Nome</mat-label>
-            <input formControlName="name"  matInput>
+            <mat-label>Cidade</mat-label>
+            <input formControlName="city"  matInput>
         </mat-form-field>
         <br>
         <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Email</mat-label>
-            <input formControlName="email"  matInput>
+            <mat-label>Estado</mat-label>
+            <input formControlName="state"  matInput>
         </mat-form-field>
         <br>
         <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Telefone</mat-label>
-            <input formControlName="email" matInput>
+            <mat-label>Distrito</mat-label>
+            <input formControlName="district" matInput>
         </mat-form-field>
 
         <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Pertence ao franqueado:</mat-label>
-            <input matInput>
+            <input formControlName="franchisee" matInput>
         </mat-form-field>
         <br>    
     </form> 

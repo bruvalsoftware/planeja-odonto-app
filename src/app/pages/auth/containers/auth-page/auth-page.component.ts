@@ -18,15 +18,17 @@ export class AuthPageComponent {
     private router: Router
   ) { }
 
-  public sendLoginForm(): void {
-    this.service.login();
+  public sendLoginForm(username, password): void {
+    this.service.login(username, password).subscribe((res) => {
+      this.service.setUserData(res.token, res.username, res.id);
+    });
 
     this.router.navigate([this.routers.DASHBOARD]).then();
   }
 
   public sendSignForm(): void {
-    this.service.sign();
+    //this.service.sign();
 
-    this.router.navigate([this.routers.DASHBOARD]).then();
+    //this.router.navigate([this.routers.DASHBOARD]).then();
   }
 }
